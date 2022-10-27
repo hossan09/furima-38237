@@ -1,24 +1,78 @@
-# README
+# テーブル設計
+## usersテーブル
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| user               | string     | null: false, unique: true      |
+| email              | string     | null: false                    |
+| encrypted_password | string     | null: false                    |
+| first_name         | string     | null: false                    |
+| last_name          | string     | null: false                    |
+| birthday           | datetime   | null: false                    |
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+-has_many :items
+-has_many :comments
+-has_many :orders
 
-Things you may want to cover:
+## itemsテーブル
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| seller             | string     | null: false                    |
+| name               | string     | null: false                    |
+| user_id            | references | null: false, foreign_key: true |
+| price              | integer    | null: false                    |
+| category           | string     | null: false                    |
+| brand              | string     | null: false                    |
+| situation          | string     | null: false                    |
 
-* Ruby version
+-belongs_to :user
+-has_many :comments
+-has_one :order
 
-* System dependencies
+## commentsテーブル
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| content            | text       | null: false                    |
+| user_id            | references | null: false, foreign_key: true |
+| item_id            | references | null: false, foreign_key: true |
 
-* Configuration
+-belongs_to :user
+-belongs_to :item
 
-* Database creation
+## ordersテーブル
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| buyer              | string     | null: false                    |
+| delivery_charge    | string     | null: false                    |
+| delivery_days      | string     | null: false                    |
+| user_id            | references | null: false, foreign_key: true |
+| item_id            | references | null: false, foreign_key: true |
 
-* Database initialization
+-has_one :delivery_address
+-has_one :delivery_day
+-has_one :delivery_charge
+-belongs_to :user
+-belongs_to :item
 
-* How to run the test suite
+## delivery_addressesテーブル
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| address            | string     | null: false                    |
+| order_id           | references | null: false, foreign_key: true |
 
-* Services (job queues, cache servers, search engines, etc.)
+-belongs_to :order
 
-* Deployment instructions
+## delivery_daysテーブル
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| day                | string     | null: false                    |
+| order_id           | references | null: false, foreign_key: true |
 
-* ...
+-belongs_to :order
+
+## delivery_chargesテーブル
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| charge             | string     | null: false                    |
+| order_id           | references | null: false, foreign_key: true |
+
+-belongs_to :order
