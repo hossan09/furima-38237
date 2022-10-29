@@ -7,9 +7,9 @@
 | encrypted_password | string     | null: false                    |
 | first_name         | string     | null: false                    |
 | last_name          | string     | null: false                    |
-| birth_year_id      | integer    | null: false                    |
-| birth_month_id     | integer    | null: false                    |
-| birth_day_id       | integer    | null: false                    |
+| first_name_kana    | string     | null: false                    |
+| last_name_kana     | string     | null: false                    |
+| birthday           | date       | null: false                    |
 
 -has_many :items
 -has_many :orders
@@ -50,10 +50,10 @@
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
 | post_code          | string     | null: false                    |
-| prefectures_id     | integer    | null: false                    |
+| delivery_area_id   | integer    | null: false                    |
 | municipalities     | string     | null: false                    |
 | address            | string     | null: false                    |
-| building_name      | string     | null: false                    |
+| building_name      | string     |                                |
 | phone_number       | string     | null: false                    |
 | order              | references | null: false, foreign_key: true |
 
