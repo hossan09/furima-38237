@@ -2,77 +2,59 @@
 ## usersテーブル
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
-| user               | string     | null: false, unique: true      |
-| email              | string     | null: false                    |
+| nickname           | string     | null: false,                   |
+| email              | string     | null: false, unique: true      |
 | encrypted_password | string     | null: false                    |
 | first_name         | string     | null: false                    |
 | last_name          | string     | null: false                    |
-| birthday           | datetime   | null: false                    |
+| birth_year_id      | integer    | null: false                    |
+| birth_month_id     | integer    | null: false                    |
+| birth_day_id       | integer    | null: false                    |
 
 -has_many :items
--has_many :comments
 -has_many :orders
 
 ## itemsテーブル
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
-| seller             | string     | null: false                    |
 | name               | string     | null: false                    |
-| user_id            | references | null: false, foreign_key: true |
+| content            | text       | null: false                    |
+| user               | references | null: false, foreign_key: true |
+| category_id        | integer    | null: false                    |
+| situation_id       | integer    | null: false                    |
+| delivery_charge_id | integer    | null: false                    |
+| delivery_area_id   | integer    | null: false                    |
+| delivery_days_id   | integer    | null: false                    |
 | price              | integer    | null: false                    |
-| category           | string     | null: false                    |
-| brand              | string     | null: false                    |
-| situation          | string     | null: false                    |
 
 -belongs_to :user
--has_many :comments
+-belongs_to :category
+-belongs_to :situation
+-belongs_to :delivery_charge
+-belongs_to :delivery_area
+-belongs_to :delivery_days
 -has_one :order
 
-## commentsテーブル
-| Column             | Type       | Options                        |
-| ------------------ | ---------- | ------------------------------ |
-| content            | text       | null: false                    |
-| user_id            | references | null: false, foreign_key: true |
-| item_id            | references | null: false, foreign_key: true |
-
--belongs_to :user
--belongs_to :item
 
 ## ordersテーブル
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
-| buyer              | string     | null: false                    |
-| delivery_charge    | string     | null: false                    |
-| delivery_days      | string     | null: false                    |
-| user_id            | references | null: false, foreign_key: true |
-| item_id            | references | null: false, foreign_key: true |
+| user               | references | null: false, foreign_key: true |
+| item               | references | null: false, foreign_key: true |
 
--has_one :delivery_address
--has_one :delivery_day
--has_one :delivery_charge
+-has_one :address
 -belongs_to :user
 -belongs_to :item
 
-## delivery_addressesテーブル
+## addressesテーブル
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
+| post_code          | string     | null: false                    |
+| prefectures_id     | integer    | null: false                    |
+| municipalities     | string     | null: false                    |
 | address            | string     | null: false                    |
-| order_id           | references | null: false, foreign_key: true |
-
--belongs_to :order
-
-## delivery_daysテーブル
-| Column             | Type       | Options                        |
-| ------------------ | ---------- | ------------------------------ |
-| day                | string     | null: false                    |
-| order_id           | references | null: false, foreign_key: true |
-
--belongs_to :order
-
-## delivery_chargesテーブル
-| Column             | Type       | Options                        |
-| ------------------ | ---------- | ------------------------------ |
-| charge             | string     | null: false                    |
-| order_id           | references | null: false, foreign_key: true |
+| building_name      | string     | null: false                    |
+| phone_number       | string     | null: false                    |
+| order              | references | null: false, foreign_key: true |
 
 -belongs_to :order
