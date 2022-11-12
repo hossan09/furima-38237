@@ -1,9 +1,32 @@
 class Item < ApplicationRecord
-  extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :category, :situation, :delivery_charge, :delivery_area, :delivery_days
+  belongs_to :user
   has_one_attached :image
 
-  validates :name, :content, :user, :category_id, :situation_id, :delivery_charge_id, :delivery_area_id, :delivery_days_id, :price, presence: true
+  with_options presence: true do
+    validates :image
+    validates :name
+    validates :content
+    validates :category_id
+    validates :situation_id
+    validates :charge_id
+    validates :area_id
+    validates :days_id
+    validates :price, numericality:  { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
+  end
 
-  validates :category_id, :situation_id, :delivery_charge_id, :delivery_area_id, :delivery_days_id, numericality: { other_than: 1 , message: "can't be blank"} 
+  with_options numericality: { other_than: 1 , message: "can't be blank"} do
+    validates :category_id
+    validates :situation_id
+    validates :charge_id
+    validates :area_id
+    validates :days_id
+  end
+
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :category 
+  belongs_to :situation
+  belongs_to :charge
+  belongs_to :area
+  belongs_to :days
+
 end
