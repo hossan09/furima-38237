@@ -82,7 +82,6 @@ RSpec.describe Item, type: :model do
       it '金額に小数点が入っていると出品できない' do
         @item.price = '300.5'
         @item.valid?
-        binding.pry
         expect(@item.errors.full_messages).to include('Price must be an integer')
       end
 
