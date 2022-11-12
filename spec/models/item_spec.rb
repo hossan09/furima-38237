@@ -79,10 +79,23 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
 
+      it '金額に小数点が入っていると出品できない' do
+        @item.price = '300.5'
+        @item.valid?
+        binding.pry
+        expect(@item.errors.full_messages).to include('Price must be an integer')
+      end
+
       it '金額が全角表記だと出品できない' do
         @item.price = '３００'
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is not a number')
+      end
+
+      it 'userが紐付いていないと保存できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end
