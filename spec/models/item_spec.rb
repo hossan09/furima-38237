@@ -32,31 +32,31 @@ RSpec.describe Item, type: :model do
       end
 
       it 'カテゴリーが選択されていないと出品できない' do
-        @item.category_id = '1'
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
 
       it '商品の状態が選択されていないと出品できない' do
-        @item.situation_id = '1'
+        @item.situation_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Situation can't be blank")
       end
 
       it '配送料の負担が選択されていないと出品できない' do
-        @item.charge_id = '1'
+        @item.charge_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Charge can't be blank")
       end
 
       it '発送元の地域が選択されていないと出品できない' do
-        @item.area_id = '1'
+        @item.area_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Area can't be blank")
       end
 
       it '発送までの日数が選択されていないと出品できない' do
-        @item.days_id = '1'
+        @item.days_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Days can't be blank")
       end
@@ -68,19 +68,19 @@ RSpec.describe Item, type: :model do
       end
 
       it '金額が300円未満では出品できない' do
-        @item.price = '299'
+        @item.price = 299
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
 
       it '金額が9999999円より高いと出品できない' do
-        @item.price = '10000000'
+        @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
 
       it '金額に小数点が入っていると出品できない' do
-        @item.price = '300.5'
+        @item.price = 300.5
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be an integer')
       end
