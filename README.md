@@ -30,9 +30,9 @@
 -belongs_to :user
 -belongs_to :category
 -belongs_to :situation
--belongs_to :delivery_charge
--belongs_to :delivery_area
--belongs_to :delivery_days
+-belongs_to :charge
+-belongs_to :area
+-belongs_to :days
 -has_one :order
 
 
