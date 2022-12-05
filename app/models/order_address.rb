@@ -8,7 +8,7 @@ class OrderAddress
     validates :area_id, numericality: { other_than: 1, message: "can't be blank" }
     validates :municipalities
     validates :address
-    validates :phone_number, numericality: { only_integer: true, message: 'is invalid'}
+    validates :phone_number, numericality: { only_integer: true,  greater_than_or_equal_to: 1000000000, less_than_or_equal_to: 99999999999, message: 'is invalid'}
   end
 
   def save
