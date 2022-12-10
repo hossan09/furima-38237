@@ -22,17 +22,17 @@
 | user               | references | null: false, foreign_key: true |
 | category_id        | integer    | null: false                    |
 | situation_id       | integer    | null: false                    |
-| delivery_charge_id | integer    | null: false                    |
-| delivery_area_id   | integer    | null: false                    |
-| delivery_days_id   | integer    | null: false                    |
+| charge_id          | integer    | null: false                    |
+| area_id            | integer    | null: false                    |
+| days_id            | integer    | null: false                    |
 | price              | integer    | null: false                    |
 
 -belongs_to :user
 -belongs_to :category
 -belongs_to :situation
--belongs_to :delivery_charge
--belongs_to :delivery_area
--belongs_to :delivery_days
+-belongs_to :charge
+-belongs_to :area
+-belongs_to :days
 -has_one :order
 
 
@@ -50,7 +50,7 @@
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
 | post_code          | string     | null: false                    |
-| delivery_area_id   | integer    | null: false                    |
+| area_id            | integer    | null: false                    |
 | municipalities     | string     | null: false                    |
 | address            | string     | null: false                    |
 | building_name      | string     |                                |
