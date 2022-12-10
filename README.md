@@ -22,9 +22,9 @@
 | user               | references | null: false, foreign_key: true |
 | category_id        | integer    | null: false                    |
 | situation_id       | integer    | null: false                    |
-| delivery_charge_id | integer    | null: false                    |
-| delivery_area_id   | integer    | null: false                    |
-| delivery_days_id   | integer    | null: false                    |
+| charge_id          | integer    | null: false                    |
+| area_id            | integer    | null: false                    |
+| days_id            | integer    | null: false                    |
 | price              | integer    | null: false                    |
 
 -belongs_to :user
